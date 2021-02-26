@@ -1,0 +1,339 @@
+::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.mHeader {
+  background-color: #3b3b3b;
+  margin: auto;
+  width: 1340px;
+  height: 80px;
+}
+
+.d-module {
+  display: grid;
+  border-bottom: 1px solid black;
+  margin: 20px 0;
+  grid-template-columns: 1fr;
+  padding: 20px;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+.d-search-bar {
+  grid-column: 1;
+}
+
+.d-question-list {
+  grid-column: 1;
+  display: grid;
+  overflow-y: scroll;
+  row-gap: 20px;
+}
+
+.d-question {
+  display: grid;
+  row-gap: 10px;
+  grid-template-columns: 3ch auto;
+}
+
+.d-module-bottom {
+  display: flex;
+  gap: 20px;
+}
+
+.d-more-questions {
+  display: inline-block;
+  text-align: left;
+}
+
+.d-add-question {
+  background-color: white;
+}
+
+.d-border-button {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 20px 60px;
+}
+
+.d-underlined {
+  text-decoration: underline;
+}
+
+.d-light {
+  font-weight: lighter;
+  font-size: smaller;
+}
+
+.d-bold {
+  font-weight: bold;
+}
+
+.d-question-toolbar {
+  float: right;
+}
+
+.d-answer {
+  margin-bottom: 1ch;
+}
+
+.d-underlined:hover,
+.d-adjust-answers:hover,
+.d-border-button:hover {
+  filter: brightness(200%);
+  cursor: pointer;
+}
+
+.d-adjust-answers {
+  display: inline-block;
+  padding: 20px;
+}
+
+.d-adjust-answers:hover {
+  border: 1px solid black;
+}
+
+.mBody {
+  margin: auto;
+  height: 85vh;
+  min-width: 1000px;
+  width: 80vw;
+}
+
+.mGalleryBody {
+  background-color: rgb(58, 58, 57);
+  height: 630px;
+  width: 800px;
+}
+
+.prodStyles {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 7px;
+  padding: 7px;
+}
+
+.prodStyles > div {
+  border-radius: 50%;
+  position: relative;
+}
+
+.prodStyles > div > div {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.jcontainer {
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr;
+  gap: 0px 0px;
+  grid-template-areas: 'ReviewSideBar ReviewList';
+  margin: 15px 0;
+  /* border: 1px solid black; */
+  padding: 15px;
+}
+
+.ReviewSideBar {
+  grid-area: ReviewSideBar;
+}
+
+.SortReviews {
+  grid-area: SortReviews;
+}
+
+.ReviewList {
+  grid-area: ReviewList;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 600px;
+  width: 850px;
+  overflow: auto;
+}
+
+.jButtonContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 20px;
+  padding-right: 10px;
+  padding-top: 20px;
+}
+
+.IndividualReview {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 1.8fr;
+  gap: 20px 20px;
+  height: 150px;
+  grid-template-areas:
+    'jStars . jDate'
+    'ReviewText ReviewText ReviewText';
+  border: 2px solid black;
+  border-width: 0px 0px 2px 0px;
+  margin-bottom: 20px;
+}
+
+.jStars {
+  grid-area: jStars;
+}
+.ReviewText {
+  grid-area: ReviewText;
+}
+.jDate {
+  grid-area: jDate;
+}
+
+.SideBarContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 20px 20px;
+  height: 600px;
+  grid-template-areas:
+    'RatingSummary'
+    'RatingBreakdown'
+    'ProductBreakdown';
+  margin: 0 20px;
+}
+
+.RatingSummary {
+  grid-area: RatingSummary;
+  height: 100px;
+}
+
+.RatingBreakdown {
+  grid-area: RatingBreakdown;
+  height: 200px;
+}
+
+.ProductBreakdown {
+  grid-area: ProductBreakdown;
+  height: 200px;
+}
+
+.overallRating {
+  font-size: 65px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.c-related-items-carousel {
+  border: '2px';
+  border-color: 'black';
+}
+
+.c-related-items {
+  border: '2px';
+  border-color: 'black';
+}
+
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top: 10px;
+}
+
+.middle {
+  float: left;
+  width: 70%;
+  margin-top: 10px;
+}
+
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.jrow:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* The bar container */
+.jbar-container {
+  width: 100%;
+  background-color: #b6b0b0;
+  text-align: center;
+  color: white;
+}
+
+/* Individual bars */
+.jbars {
+  height: 10px;
+  background-color: black;
+}
+
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media (max-width: 300px) {
+  .side,
+  .middle {
+    width: 100%;
+  }
+  /* Hide the right column on small screens */
+  .right {
+    display: none;
+  }
+}
+
+.jbarGraph {
+  font-size: 14px;
+}
+
+.jXAxis {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#helpfulAndReport {
+  position: absolute;
+  bottom: 0;
+}
+.mCarouselStyle {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.mSelectorIndicator {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.jModal {
+  height: 200%;
+  width: 200%;
+}
+
+.jmarker {
+  color: black;
+  height: 10px;
+  font-size: '16px';
+  position: relative;
+  bottom: 10px;
+}
+
+.jMarkerContainer {
+  width: 100%;
+  background-color: #b6b0b0;
+  height: 10px;
+}
+
+.row {
+  padding: 10px;
+}
