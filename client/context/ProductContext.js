@@ -8,7 +8,7 @@ export const ProductProvider = ({ children }) => {
   const [zoomIn, setZoomIn] = useState(false);
 
   useEffect(() => {
-    getSingleProduct(12012);
+    getSingleProduct(21111);
   }, []);
 
   const getSingleProduct = (prodID) => {
