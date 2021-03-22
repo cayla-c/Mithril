@@ -123,19 +123,19 @@ export const HooksRelatedItems = () => {
                       }}
                     >
                       <p
-                        // style={{
-                        //   color: 'yellow',
-                        //   fontSize: '25px',
-                        //   textAlign: 'right',
-                        //   zIndex: '100',
-                        //   position: 'absolute'
-                        // }}
+                        style={{
+                          color: 'yellow',
+                          fontSize: '25px',
+                          textAlign: 'right',
+                          zIndex: '100',
+                          position: 'absolute'
+                        }}
                         onClick={() => {
                           setShow(true);
                           updateSelectedProduct(product);
                         }}
                       >
-                        {/* &#9733; */}
+                        &#9733;
                       </p>
                       <div
                         style={{
