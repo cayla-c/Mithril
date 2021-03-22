@@ -225,15 +225,52 @@ body {
   font-weight: bold;
 }
 
-.c-related-items-carousel {
-  border: '2px';
-  border-color: 'black';
+.c-related-and-outfit {
+  display: grid;
+  border-bottom: 1px solid black;
+  margin: 20px 0;
+  /* grid-template-columns: 1fr; */
+  /* padding: 20px;
+  column-gap: 20px;
+  row-gap: 20px; */
 }
 
-.c-related-items {
-  border: '2px';
-  border-color: 'black';
+.c-related-items-carousel {
+  position:relative;
+  /* margin:50px; */
+  border:none;
+  box-sizing: border-box;
 }
+
+.buttonBack, .buttonNext {
+  position:absolute;
+  top:50%;
+  display: inline-block;
+  width:44px;
+  height:44px;
+  padding:10px;
+  /* transition: background-color 300ms; */
+  transform: translateY(-50%);
+  border: 0 none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  opacity: .5;
+  cursor:pointer;}
+
+.buttonBack:hover, .buttonNext:hover, .buttonBackDisabledHidden:hover, .buttonNextDisabledHidden:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: .9; }
+
+.buttonBack:disabled, .buttonNext:disabled, .buttonBackDisabledHidden:disabled, .buttonNextDisabledHidden:disabled {
+    cursor: pointer;
+    opacity: 0.3;
+}
+
+.buttonBack {
+  left: -5px; }
+
+.buttonNext {
+  right: -5px; }
 
 /* Three column layout */
 .side {

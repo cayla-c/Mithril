@@ -81,21 +81,18 @@ export const HooksRelatedItems = () => {
 
   return (
     <>
-      <b>Related Items</b>
-      <div className='border' style={{ height: '500px', overflow: 'hidden' }}>
+      <strong className='c-related-and-outfit'>RELATED ITEMS</strong>
+      <div className='border' style={{ height: '700px', overflow: 'hidden' }}>
         <CarouselProvider
           className='c-related-items-carousel'
-          naturalSlideHeight={100}
-          naturalSlideWidth={100}
+          naturalSlideHeight={300}
+          naturalSlideWidth={300}
           totalSlides={relatedProductInfo.length}
           visibleSlides={3}
           dragEnabled={false}
+          infinite={true}
         >
-          <div>
-            <ButtonBack className='d-bold d-border-button'>Back</ButtonBack>
-            <ButtonNext className='d-bold d-border-button'>Next</ButtonNext>
-          </div>
-          <Slider aria-label='related products carousel'>
+            <Slider aria-label='related products carousel'>
             {relatedProductInfo.map(
               (product) =>
                 product.thumbnail && (
@@ -103,19 +100,19 @@ export const HooksRelatedItems = () => {
                     aria-label='product slide'
                     key={Math.random()}
                     style={{
-                      borderStyle: 'solid',
-                      height: '300px',
+                      // borderStyle: 'solid',
+                      height: '200px',
                       width: '325px',
-                      marginLeft: '7px',
-                      marginRight: '7px',
+                      // marginLeft: '7px',
+                      // marginRight: '7px',
                       position: 'relative'
                     }}
                     index={0}
                   >
                     <div
                       style={{
-                        height: '400px',
-                        width: '280px',
+                        height: '300px',
+                        width: '200px',
                         display: 'block',
                         marginLeft: 'auto',
                         marginRight: 'auto',
@@ -149,11 +146,11 @@ export const HooksRelatedItems = () => {
                             getSingleProduct(product.id);
                           }}
                           style={{
-                            height: '300px',
-                            width: '300px',
+                            height: '400px',
+                            width: '400px',
                             backgroundImage: product.thumbnail
                               ? `url(${
-                                  product.thumbnail.split('&w=')[0] + '&w=300&h=300&crop=faces'
+                                  product.thumbnail.split('&w=')[0] + '&w=400&h=400&crop=faces'
                                 })`
                               : null,
                             backgroundRepeat: 'no-repeat'
@@ -179,6 +176,16 @@ export const HooksRelatedItems = () => {
                 )
             )}
           </Slider>
+          <ButtonBack className='buttonBack'>
+              <span>
+                <i class="fas fa-angle-left"></i>
+              </span>
+            </ButtonBack>
+            <ButtonNext className='buttonNext'>
+              <span>
+                <i class="fas fa-angle-right"></i>
+              </span>
+            </ButtonNext>
         </CarouselProvider>
         <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header closeButton>
