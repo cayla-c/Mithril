@@ -5,6 +5,8 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Modal } from 'react-bootstrap';
 import StarRatings from 'react-star-ratings';
+// import CompareIcon from './CompareIcon.js';
+// import { ReactComponent as Icon } from './noun_Compare_329808.svg';
 
 export const HooksRelatedItems = () => {
   const { curProduct, getSingleProduct } = useContext(ProductContext);
@@ -92,7 +94,7 @@ export const HooksRelatedItems = () => {
           dragEnabled={false}
           infinite={true}
         >
-            <Slider aria-label='related products carousel'>
+            <Slider aria-label='related products carousel' className='c-slider'>
             {relatedProductInfo.map(
               (product) =>
                 product.thumbnail && (
@@ -100,11 +102,8 @@ export const HooksRelatedItems = () => {
                     aria-label='product slide'
                     key={Math.random()}
                     style={{
-                      // borderStyle: 'solid',
-                      height: '200px',
-                      width: '325px',
-                      // marginLeft: '7px',
-                      // marginRight: '7px',
+                      height: '300px',
+                      width: '300px',
                       position: 'relative'
                     }}
                     index={0}
@@ -112,27 +111,27 @@ export const HooksRelatedItems = () => {
                     <div
                       style={{
                         height: '300px',
-                        width: '200px',
+                        width: '300px',
                         display: 'block',
                         marginLeft: 'auto',
                         marginRight: 'auto',
-                        width: '95%'
+                        // width: '95%'
                       }}
                     >
                       <p
                         style={{
-                          color: 'yellow',
                           fontSize: '25px',
-                          textAlign: 'right',
-                          zIndex: '100',
-                          position: 'absolute'
+                          zIndex: '2',
+                          position: 'absolute',
+                          cursor: 'pointer',
+                          marginLeft: '5px'
                         }}
                         onClick={() => {
                           setShow(true);
                           updateSelectedProduct(product);
                         }}
                       >
-                        &#9733;
+                        <i className="far fa-clone compare"></i>
                       </p>
                       <div
                         style={{

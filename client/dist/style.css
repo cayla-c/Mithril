@@ -242,6 +242,16 @@ body {
   box-sizing: border-box;
 }
 
+.c-slider {
+  border:none;
+}
+
+.compare {
+  color: rgba(236, 118, 0, 1);
+  height:44px;
+  width:44px;
+}
+
 .buttonBack, .buttonNext {
   position:absolute;
   top:50%;
