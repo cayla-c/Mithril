@@ -1,4 +1,4 @@
-# Team Mithril - Front End Capstone Project
+# Mithril
 
 ## Overview
 

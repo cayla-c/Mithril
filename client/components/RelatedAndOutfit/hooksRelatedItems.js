@@ -5,6 +5,8 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Modal } from 'react-bootstrap';
 import StarRatings from 'react-star-ratings';
+import ratingCalculations from '../RatingsReviews/ratingCalculations.js';
+// import RatingSummary from '../RatingsReviews/RatingSummary.js';
 // import CompareIcon from './CompareIcon.js';
 // import { ReactComponent as Icon } from './noun_Compare_329808.svg';
 
@@ -22,7 +24,8 @@ export const HooksRelatedItems = () => {
       let tempObj = {};
       let urls = [
         '/proxy/api/fec2/hratx/products/' + item.toString(),
-        '/proxy/api/fec2/hratx/products/' + item.toString() + '/styles'
+        '/proxy/api/fec2/hratx/products/' + item.toString() + '/styles',
+        '/proxy/api/fec2/hratx/reviews/meta?product_id=' + item.toString()
       ];
       Promise.all(
         urls.map((url) => {
@@ -30,9 +33,12 @@ export const HooksRelatedItems = () => {
         })
       )
         .then((data) => {
-          tempObj = data[0];
+          tempObj.info = data[0];
           if (data[1].results[0].photos[0].thumbnail_url) {
             tempObj.thumbnail = data[1].results[0].photos[0].thumbnail_url;
+          }
+          if (data[2].ratings) {
+            tempObj.rating = ratingCalculations(data[2].ratings);
           }
         })
         .then(() => {
@@ -54,12 +60,13 @@ export const HooksRelatedItems = () => {
     // selectedProduct features + curProduct features
     let tempFeatures = Array.from(
       new Set(
-        product.features.map((i) => i.feature).concat(curProduct.features.map((i) => i.feature))
+        product.info.features.map((i) => i.feature).concat(curProduct.features.map((i) => i.feature))
       )
     );
     setSelectedProduct(product);
     setShow(true);
     setCombinedFeatures(tempFeatures);
+    console.log(relatedProductInfo);
   };
 
   useEffect(() => {
@@ -84,11 +91,11 @@ export const HooksRelatedItems = () => {
   return (
     <>
       <strong className='c-related-and-outfit'>RELATED ITEMS</strong>
-      <div className='border' style={{ height: '700px', overflow: 'hidden' }}>
+      <div style={{ height: '530px', overflow: 'hidden' }}>
         <CarouselProvider
           className='c-related-items-carousel'
-          naturalSlideHeight={300}
-          naturalSlideWidth={300}
+          naturalSlideHeight={500}
+          naturalSlideWidth={400}
           totalSlides={relatedProductInfo.length}
           visibleSlides={3}
           dragEnabled={false}
@@ -100,18 +107,20 @@ export const HooksRelatedItems = () => {
                 product.thumbnail && (
                   <Slide
                     aria-label='product slide'
-                    key={Math.random()}
+                    // key={Math.random()}
+                    key={product.info.id}
                     style={{
-                      height: '300px',
-                      width: '300px',
-                      position: 'relative'
+                      height: '400px',
+                      width: '400px',
+                      position: 'relative',
+                      marginRight: '20px'
                     }}
                     index={0}
                   >
                     <div
                       style={{
-                        height: '300px',
-                        width: '300px',
+                        height: '400px',
+                        width: '400px',
                         display: 'block',
                         marginLeft: 'auto',
                         marginRight: 'auto',
@@ -120,11 +129,12 @@ export const HooksRelatedItems = () => {
                     >
                       <p
                         style={{
-                          fontSize: '25px',
+                          fontSize: '30px',
                           zIndex: '2',
                           position: 'absolute',
                           cursor: 'pointer',
-                          marginLeft: '5px'
+                          marginLeft: '10px',
+                          marginTop: '10px'
                         }}
                         onClick={() => {
                           setShow(true);
@@ -142,7 +152,7 @@ export const HooksRelatedItems = () => {
                       >
                         <div
                           onClick={() => {
-                            getSingleProduct(product.id);
+                            getSingleProduct(product.info.id);
                           }}
                           style={{
                             height: '400px',
@@ -156,12 +166,12 @@ export const HooksRelatedItems = () => {
                           }}
                         ></div>
                         <div style={{ height: '30%', width: '100%' }}>
-                          <div className='fs-6 m-0'>{product.category}</div>
-                          <div className='fs-6 m-0'>{product.name}</div>
-                          <div className='fs-6 m-0'>${product.default_price}</div>
-                          <div className='fs-6 m-0'>
+                          <div className='fs-6 m-0 prodCategory'>{product.info.category}</div>
+                          <div className='fs-6 m-0'>{product.info.name}</div>
+                          <div className='fs-6 m-0'>${product.info.default_price}</div>
+                          <div className='fs-6 m-0 jstars'>
                             <StarRatings
-                              rating={3.8}
+                              rating={product.rating.ratingAverage || 0}
                               starRatedColor='#394a6d'
                               numberOfStars={5}
                               name='rating'
@@ -194,14 +204,14 @@ export const HooksRelatedItems = () => {
             <table>
               <tbody>
                 <tr>
-                  <th>{selectedProduct && selectedProduct.name}</th>
+                  <th>{selectedProduct && selectedProduct.info.name}</th>
                   <th>vs.</th>
                   <th>{curProduct.name}</th>
                 </tr>
                 {combinedFeatures.map((feat) => {
                   let theValueL = '';
                   let theValueR = '';
-                  selectedProduct.features.find((i) => {
+                  selectedProduct.info.features.find((i) => {
                     if (i.feature === feat) {
                       theValueL = i.value;
                     }
