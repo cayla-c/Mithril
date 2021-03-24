@@ -5,6 +5,10 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Modal } from 'react-bootstrap';
 import StarRatings from 'react-star-ratings';
+import ratingCalculations from '../RatingsReviews/ratingCalculations.js';
+// import RatingSummary from '../RatingsReviews/RatingSummary.js';
+// import CompareIcon from './CompareIcon.js';
+// import { ReactComponent as Icon } from './noun_Compare_329808.svg';
 
 export const HooksRelatedItems = () => {
   const { curProduct, getSingleProduct } = useContext(ProductContext);
@@ -20,7 +24,8 @@ export const HooksRelatedItems = () => {
       let tempObj = {};
       let urls = [
         '/proxy/api/fec2/hratx/products/' + item.toString(),
-        '/proxy/api/fec2/hratx/products/' + item.toString() + '/styles'
+        '/proxy/api/fec2/hratx/products/' + item.toString() + '/styles',
+        '/proxy/api/fec2/hratx/reviews/meta?product_id=' + item.toString()
       ];
       Promise.all(
         urls.map((url) => {
@@ -28,9 +33,12 @@ export const HooksRelatedItems = () => {
         })
       )
         .then((data) => {
-          tempObj = data[0];
+          tempObj.info = data[0];
           if (data[1].results[0].photos[0].thumbnail_url) {
             tempObj.thumbnail = data[1].results[0].photos[0].thumbnail_url;
+          }
+          if (data[2].ratings) {
+            tempObj.rating = ratingCalculations(data[2].ratings);
           }
         })
         .then(() => {
@@ -52,12 +60,13 @@ export const HooksRelatedItems = () => {
     // selectedProduct features + curProduct features
     let tempFeatures = Array.from(
       new Set(
-        product.features.map((i) => i.feature).concat(curProduct.features.map((i) => i.feature))
+        product.info.features.map((i) => i.feature).concat(curProduct.features.map((i) => i.feature))
       )
     );
     setSelectedProduct(product);
     setShow(true);
     setCombinedFeatures(tempFeatures);
+    console.log(relatedProductInfo);
   };
 
   useEffect(() => {
@@ -81,61 +90,58 @@ export const HooksRelatedItems = () => {
 
   return (
     <>
-      <b>Related Items</b>
-      <div className='border' style={{ height: '500px', overflow: 'hidden' }}>
+      <strong className='c-related-and-outfit'>RELATED ITEMS</strong>
+      <div style={{ height: '530px', overflow: 'hidden' }}>
         <CarouselProvider
           className='c-related-items-carousel'
-          naturalSlideHeight={100}
-          naturalSlideWidth={100}
+          naturalSlideHeight={500}
+          naturalSlideWidth={400}
           totalSlides={relatedProductInfo.length}
           visibleSlides={3}
           dragEnabled={false}
+          infinite={true}
         >
-          <div>
-            <ButtonBack className='d-bold d-border-button'>Back</ButtonBack>
-            <ButtonNext className='d-bold d-border-button'>Next</ButtonNext>
-          </div>
-          <Slider aria-label='related products carousel'>
+            <Slider aria-label='related products carousel' className='c-slider'>
             {relatedProductInfo.map(
               (product) =>
                 product.thumbnail && (
                   <Slide
                     aria-label='product slide'
-                    key={Math.random()}
+                    // key={Math.random()}
+                    key={product.info.id}
                     style={{
-                      borderStyle: 'solid',
-                      height: '300px',
-                      width: '325px',
-                      marginLeft: '7px',
-                      marginRight: '7px',
-                      position: 'relative'
+                      height: '400px',
+                      width: '400px',
+                      position: 'relative',
+                      marginRight: '20px'
                     }}
                     index={0}
                   >
                     <div
                       style={{
                         height: '400px',
-                        width: '280px',
+                        width: '400px',
                         display: 'block',
                         marginLeft: 'auto',
                         marginRight: 'auto',
-                        width: '95%'
+                        // width: '95%'
                       }}
                     >
                       <p
-                        // style={{
-                        //   color: 'yellow',
-                        //   fontSize: '25px',
-                        //   textAlign: 'right',
-                        //   zIndex: '100',
-                        //   position: 'absolute'
-                        // }}
+                        style={{
+                          fontSize: '30px',
+                          zIndex: '2',
+                          position: 'absolute',
+                          cursor: 'pointer',
+                          marginLeft: '10px',
+                          marginTop: '10px'
+                        }}
                         onClick={() => {
                           setShow(true);
                           updateSelectedProduct(product);
                         }}
                       >
-                        {/* &#9733; */}
+                        <i className="far fa-clone compare"></i>
                       </p>
                       <div
                         style={{
@@ -146,26 +152,26 @@ export const HooksRelatedItems = () => {
                       >
                         <div
                           onClick={() => {
-                            getSingleProduct(product.id);
+                            getSingleProduct(product.info.id);
                           }}
                           style={{
-                            height: '300px',
-                            width: '300px',
+                            height: '400px',
+                            width: '400px',
                             backgroundImage: product.thumbnail
                               ? `url(${
-                                  product.thumbnail.split('&w=')[0] + '&w=300&h=300&crop=faces'
+                                  product.thumbnail.split('&w=')[0] + '&w=400&h=400&crop=faces'
                                 })`
                               : null,
                             backgroundRepeat: 'no-repeat'
                           }}
                         ></div>
                         <div style={{ height: '30%', width: '100%' }}>
-                          <div className='fs-6 m-0'>{product.category}</div>
-                          <div className='fs-6 m-0'>{product.name}</div>
-                          <div className='fs-6 m-0'>${product.default_price}</div>
-                          <div className='fs-6 m-0'>
+                          <div className='fs-6 m-0 prodCategory'>{product.info.category}</div>
+                          <div className='fs-6 m-0'>{product.info.name}</div>
+                          <div className='fs-6 m-0'>${product.info.default_price}</div>
+                          <div className='fs-6 m-0 jstars'>
                             <StarRatings
-                              rating={3.8}
+                              rating={product.rating.ratingAverage || 0}
                               starRatedColor='#394a6d'
                               numberOfStars={5}
                               name='rating'
@@ -179,6 +185,16 @@ export const HooksRelatedItems = () => {
                 )
             )}
           </Slider>
+          <ButtonBack className='buttonBack'>
+              <span>
+                <i class="fas fa-angle-left"></i>
+              </span>
+            </ButtonBack>
+            <ButtonNext className='buttonNext'>
+              <span>
+                <i class="fas fa-angle-right"></i>
+              </span>
+            </ButtonNext>
         </CarouselProvider>
         <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header closeButton>
@@ -188,14 +204,14 @@ export const HooksRelatedItems = () => {
             <table>
               <tbody>
                 <tr>
-                  <th>{selectedProduct && selectedProduct.name}</th>
+                  <th>{selectedProduct && selectedProduct.info.name}</th>
                   <th>vs.</th>
                   <th>{curProduct.name}</th>
                 </tr>
                 {combinedFeatures.map((feat) => {
                   let theValueL = '';
                   let theValueR = '';
-                  selectedProduct.features.find((i) => {
+                  selectedProduct.info.features.find((i) => {
                     if (i.feature === feat) {
                       theValueL = i.value;
                     }

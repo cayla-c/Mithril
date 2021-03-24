@@ -16,7 +16,8 @@ body {
 
 .d-module {
   display: grid;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid;
+  border-color:rgb(79, 79, 79);
   margin: 20px 0;
   grid-template-columns: 1fr;
   padding: 20px;
@@ -225,15 +226,67 @@ body {
   font-weight: bold;
 }
 
-.c-related-items-carousel {
-  border: '2px';
-  border-color: 'black';
+.c-related-and-outfit {
+  display: grid;
+  border-top: 1px solid;
+  border-color: rgb(79, 79, 79);
+  margin: 20px 0;
+  /* grid-template-columns: 1fr; */
+  padding: 20px;
+  /* column-gap: 20px; */
+  row-gap: 20px;
 }
 
-.c-related-items {
-  border: '2px';
-  border-color: 'black';
+.productCategory {
+  color: rgb(79, 79, 79);
 }
+
+.c-related-items-carousel {
+  position:relative;
+  /* margin:50px; */
+  border:none;
+  box-sizing: border-box;
+}
+
+.c-slider {
+  border:none;
+}
+
+.compare {
+  color: rgba(236, 118, 0, 1);
+  height:55px;
+  width:55px;
+}
+
+.buttonBack, .buttonNext {
+  position:absolute;
+  top:50%;
+  display: inline-block;
+  width:44px;
+  height:44px;
+  padding:10px;
+  /* transition: background-color 300ms; */
+  transform: translateY(-50%);
+  border: 0 none;
+  border-radius: 50%;
+  background-color: rgb(79, 79, 79);
+  opacity: .5;
+  cursor:pointer;}
+
+.buttonBack:hover, .buttonNext:hover, .buttonBackDisabledHidden:hover, .buttonNextDisabledHidden:hover {
+    background-color: rgb(79, 79, 79);
+    opacity: .9; }
+
+.buttonBack:disabled, .buttonNext:disabled, .buttonBackDisabledHidden:disabled, .buttonNextDisabledHidden:disabled {
+    cursor: pointer;
+    opacity: 0.3;
+}
+
+.buttonBack {
+  left: -5px; }
+
+.buttonNext {
+  right: -5px; }
 
 /* Three column layout */
 .side {
