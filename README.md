@@ -18,9 +18,7 @@
 
 Mithril is a single-page web application for browsing, purchasing, and providing feedback on stylish modern clothing. The site has a React-based front-end.
 
-## Demo
-
-![video of related items carousel component] (https://github.com/cayla-c/Mithril/blob/main/Mithril.gif)
+![video of related items carousel component] (./Mithril.gif)
 
 # Technologies
 
