@@ -235,10 +235,7 @@ body {
   padding: 20px;
   /* column-gap: 20px; */
   row-gap: 20px;
-}
-
-.productCategory {
-  color: rgb(79, 79, 79);
+  font-size:25px;
 }
 
 .c-related-items-carousel {
@@ -246,6 +243,7 @@ body {
   /* margin:50px; */
   border:none;
   box-sizing: border-box;
+  /* font-size:25px; */
 }
 
 .c-slider {
@@ -253,40 +251,109 @@ body {
 }
 
 .compare {
-  color: rgba(236, 118, 0, 1);
+  /* color: rgba(236, 118, 0, 1); */
+  color:white;
   height:55px;
   width:55px;
 }
 
+.relatedItemName {
+  font-size:25px;
+  font-weight:bold;
+  color:black;
+}
+
 .buttonBack, .buttonNext {
+  color:black;
+  fill:black;
   position:absolute;
-  top:50%;
+  top:40%;
   display: inline-block;
+  text-align:center;
+  align-items:center;
+  justify-content:center;
+  vertical-align:middle;
   width:44px;
   height:44px;
-  padding:10px;
-  /* transition: background-color 300ms; */
-  transform: translateY(-50%);
-  border: 0 none;
+  padding:5px;
+  transition: 300ms;
+  border: none;
   border-radius: 50%;
-  background-color: rgb(79, 79, 79);
-  opacity: .5;
-  cursor:pointer;}
+  background-color: white;
+  opacity: .6;
+  cursor:pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .buttonBack:hover, .buttonNext:hover, .buttonBackDisabledHidden:hover, .buttonNextDisabledHidden:hover {
-    background-color: rgb(79, 79, 79);
-    opacity: .9; }
+    opacity: .3;
+  }
 
 .buttonBack:disabled, .buttonNext:disabled, .buttonBackDisabledHidden:disabled, .buttonNextDisabledHidden:disabled {
-    cursor: pointer;
     opacity: 0.3;
 }
 
 .buttonBack {
-  left: -5px; }
+  left: 10px;
+}
 
 .buttonNext {
-  right: -5px; }
+  right: 10px;
+}
+
+.c-modal-table {
+  width:100%;
+}
+
+.c-modal-th {
+  font-size:22px;
+  height:40px;
+}
+
+.c-modal-thl {
+  text-align:left;
+  width:40%;
+}
+
+.c-modal-thc {
+  text-align:center;
+  width:20%;
+}
+
+.c-modal-thr {
+  text-align:right;
+  width:40%;
+}
+
+.c-modal-tr {
+  height:25px;
+  border-top:1px solid;
+  border-color:gray;
+}
+
+.c-modal-tdl {
+  text-align:left;
+  width:40%;
+  font-size:18px;
+}
+
+.c-modal-tdc {
+  text-align:center;
+  color:gray;
+  font-size:16px;
+  width:20%;
+}
+
+.c-modal-tdr {
+  text-align:right;
+  width:40%;
+  font-size:18px;
+}
+
+/* .c-modal-closeButton {
+  border-radius:50%;
+} */
 
 /* Three column layout */
 .side {

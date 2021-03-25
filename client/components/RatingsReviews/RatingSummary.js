@@ -4,7 +4,7 @@ import ratingCalculations from './ratingCalculations.js';
 
 const RatingSummary = ({ allRatings }) => {
   let { ratingAverage } = ratingCalculations(allRatings);
-  console.log('rating Average: ', ratingAverage)
+
   return (
     <div>
       <b>Ratings &amp; Reviews </b>

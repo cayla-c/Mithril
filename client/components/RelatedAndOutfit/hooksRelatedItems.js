@@ -3,7 +3,7 @@ import { ProductContext } from '../../context/ProductContext';
 import axios from 'axios';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import StarRatings from 'react-star-ratings';
 import ratingCalculations from '../RatingsReviews/ratingCalculations.js';
 // import RatingSummary from '../RatingsReviews/RatingSummary.js';
@@ -66,7 +66,7 @@ export const HooksRelatedItems = () => {
     setSelectedProduct(product);
     setShow(true);
     setCombinedFeatures(tempFeatures);
-    console.log(relatedProductInfo);
+    // console.log(relatedProductInfo);
   };
 
   useEffect(() => {
@@ -95,10 +95,10 @@ export const HooksRelatedItems = () => {
         <CarouselProvider
           className='c-related-items-carousel'
           naturalSlideHeight={500}
-          naturalSlideWidth={400}
+          naturalSlideWidth={406}
           totalSlides={relatedProductInfo.length}
           visibleSlides={3}
-          dragEnabled={false}
+          dragEnabled={true}
           infinite={true}
         >
             <Slider aria-label='related products carousel' className='c-slider'>
@@ -107,11 +107,10 @@ export const HooksRelatedItems = () => {
                 product.thumbnail && (
                   <Slide
                     aria-label='product slide'
-                    // key={Math.random()}
                     key={product.info.id}
                     style={{
                       height: '400px',
-                      width: '400px',
+                      width: '406px',
                       position: 'relative',
                       marginRight: '20px'
                     }}
@@ -120,7 +119,7 @@ export const HooksRelatedItems = () => {
                     <div
                       style={{
                         height: '400px',
-                        width: '400px',
+                        width: '406px',
                         display: 'block',
                         marginLeft: 'auto',
                         marginRight: 'auto',
@@ -156,28 +155,29 @@ export const HooksRelatedItems = () => {
                           }}
                           style={{
                             height: '400px',
-                            width: '400px',
+                            width: '406px',
                             backgroundImage: product.thumbnail
                               ? `url(${
-                                  product.thumbnail.split('&w=')[0] + '&w=400&h=400&crop=faces'
+                                  product.thumbnail.split('&w=')[0] + '&w=406&h=400&crop=faces'
                                 })`
                               : null,
                             backgroundRepeat: 'no-repeat'
                           }}
                         ></div>
                         <div style={{ height: '30%', width: '100%' }}>
-                          <div className='fs-6 m-0 prodCategory'>{product.info.category}</div>
-                          <div className='fs-6 m-0'>{product.info.name}</div>
-                          <div className='fs-6 m-0'>${product.info.default_price}</div>
-                          <div className='fs-6 m-0 jstars'>
+                        <div>
                             <StarRatings
-                              rating={product.rating.ratingAverage || 0}
-                              starRatedColor='#394a6d'
-                              numberOfStars={5}
-                              name='rating'
-                              starDimension='20px'
-                            />
+                                rating={product.rating.ratingAverage || 0}
+                                starRatedColor='#394a6d'
+                                numberOfStars={5}
+                                className='relatedRatingStars'
+                                starDimension='18px'
+                              />
                           </div>
+                          <div className='fs-6 m-0 prodCategory'>
+                            <span className='relatedItemName'>{product.info.name}</span>
+                          </div>
+                          <div className='fs-6 m-0'>${product.info.default_price}</div>
                         </div>
                       </div>
                     </div>
@@ -187,30 +187,40 @@ export const HooksRelatedItems = () => {
           </Slider>
           <ButtonBack className='buttonBack'>
               <span>
-                <i class="fas fa-angle-left"></i>
+                <i class="fas fa-angle-left fa-2x"></i>
               </span>
             </ButtonBack>
             <ButtonNext className='buttonNext'>
               <span>
-                <i class="fas fa-angle-right"></i>
+                <i class="fas fa-angle-right fa-2x"></i>
               </span>
             </ButtonNext>
         </CarouselProvider>
-        <Modal show={show} onHide={() => setShow(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Choices, choices....</Modal.Title>
+        <Modal
+          className='c-modal'
+          size='lg'
+          show={show}
+          onHide={() => setShow(false)}>
+          <Modal.Header >
+            <Modal.Title fontSize='24px'>Choices, choices....</Modal.Title>
+            <Button
+              variant="outline-dark"
+              onClick={() => {setShow(false)}}
+              className='c-modal-closeButton'>
+              <i class="fas fa-times"></i>
+            </Button>
           </Modal.Header>
           <Modal.Body>
-            <table>
-              <tbody>
+            <table className='c-modal-table'>
+              <tbody >
                 <tr>
-                  <th>{selectedProduct && selectedProduct.info.name}</th>
-                  <th>vs.</th>
-                  <th>{curProduct.name}</th>
+                  <th className='c-modal-th c-modal-thl'>{selectedProduct && selectedProduct.info.name}</th>
+                  <th className='c-modal-th c-modal-thc'>vs.</th>
+                  <th className='c-modal-th c-modal-thr'>{curProduct.name}</th>
                 </tr>
                 {combinedFeatures.map((feat) => {
-                  let theValueL = '';
-                  let theValueR = '';
+                  let theValueL = '--';
+                  let theValueR = '--';
                   selectedProduct.info.features.find((i) => {
                     if (i.feature === feat) {
                       theValueL = i.value;
@@ -222,10 +232,10 @@ export const HooksRelatedItems = () => {
                     }
                   });
                   return (
-                    <tr>
-                      <td>{theValueL}</td>
-                      <td>{feat}</td>
-                      <td>{theValueR}</td>
+                    <tr className='c-modal-tr'>
+                      <td className='c-modal-tdl'>{theValueL}</td>
+                      <td className='c-modal-tdc'>{feat}</td>
+                      <td className='c-modal-tdr'>{theValueR}</td>
                     </tr>
                   );
                 })}
