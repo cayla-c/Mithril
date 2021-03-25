@@ -100,6 +100,7 @@ export const HooksRelatedItems = () => {
           visibleSlides={3}
           dragEnabled={true}
           infinite={true}
+          currentSlide={0}
         >
             <Slider aria-label='related products carousel' className='c-slider'>
             {relatedProductInfo.map(

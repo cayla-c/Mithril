@@ -16,7 +16,9 @@
 
 ## Description
 
-Mithril is a responsive single-page web application for browsing, purchasing, and providing feedback on stylish modern clothing. The site is hosted on AWS and has a React-based front-end.
+Mithril is a responsive single-page web application for browsing, purchasing, and providing feedback on stylish modern clothing. The site has a React-based front-end.
+
+![video of related items carousel component] (https://github.com/cayla-c/mithril/Mithril.gif)
 
 # Technologies
 
