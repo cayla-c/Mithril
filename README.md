@@ -16,7 +16,9 @@
 
 ## Description
 
-Mithril is a single-page web application for browsing, purchasing, and providing feedback on stylish modern clothing. The site has a React-based front-end.
+Mithril is a single-page web application for browsing, purchasing, and providing feedback on stylish modern clothing. The site has a React-based front-end.  My specific contribution was implementing the "related items" component, which displays as a carousel; each item can be compared with the main product above in the overview component, and when an item is selected it becomes the main product.
+
+![](Mithril.gif)
 
 # Technologies
 
@@ -57,13 +59,6 @@ Follow below directions for testing, development, and production.
 - [Jason Fleming](https://github.com/jfleming9357)
 - [Cayla Cardiff](https://github.com/cayla-c)
 - [Daniel He](https://github.com/daniel-he-dev)
-
-## Roadmap
-
-- Robust test suites, including integration and E2E testing
-- Standardization and minification of CSS styles
-- Continuous Integration/Deployment
-- Additional user features
 
 ## License
 
